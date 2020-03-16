@@ -1,6 +1,6 @@
 <?php
 
-namespace AsyncAws\Sqs\Input;
+namespace AsyncAws\Sqs\ValueObject;
 
 use AsyncAws\Core\Exception\InvalidArgument;
 
@@ -10,48 +10,36 @@ class MessageSystemAttributeValue
      * Strings are Unicode with UTF-8 binary encoding. For a list of code values, see ASCII Printable Characters.
      *
      * @see http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters
-     *
-     * @var string|null
      */
     private $StringValue;
 
     /**
      * Binary type attributes can store any binary data, such as compressed data, encrypted data, or images.
-     *
-     * @var string|null
      */
     private $BinaryValue;
 
     /**
      * Not implemented. Reserved for future use.
-     *
-     * @var string[]
      */
     private $StringListValues;
 
     /**
      * Not implemented. Reserved for future use.
-     *
-     * @var string[]
      */
     private $BinaryListValues;
 
     /**
      * Amazon SQS supports the following logical data types: `String`, `Number`, and `Binary`. For the `Number` data type,
      * you must use `StringValue`.
-     *
-     * @required
-     *
-     * @var string|null
      */
     private $DataType;
 
     /**
      * @param array{
-     *   StringValue?: string,
-     *   BinaryValue?: string,
-     *   StringListValues?: string[],
-     *   BinaryListValues?: string[],
+     *   StringValue?: null|string,
+     *   BinaryValue?: null|string,
+     *   StringListValues?: null|string[],
+     *   BinaryListValues?: null|string[],
      *   DataType: string,
      * } $input
      */
@@ -82,7 +70,7 @@ class MessageSystemAttributeValue
         return $this->BinaryValue;
     }
 
-    public function getDataType(): ?string
+    public function getDataType(): string
     {
         return $this->DataType;
     }
@@ -98,47 +86,6 @@ class MessageSystemAttributeValue
     public function getStringValue(): ?string
     {
         return $this->StringValue;
-    }
-
-    /**
-     * @param string[] $value
-     */
-    public function setBinaryListValues(array $value): self
-    {
-        $this->BinaryListValues = $value;
-
-        return $this;
-    }
-
-    public function setBinaryValue(?string $value): self
-    {
-        $this->BinaryValue = $value;
-
-        return $this;
-    }
-
-    public function setDataType(?string $value): self
-    {
-        $this->DataType = $value;
-
-        return $this;
-    }
-
-    /**
-     * @param string[] $value
-     */
-    public function setStringListValues(array $value): self
-    {
-        $this->StringListValues = $value;
-
-        return $this;
-    }
-
-    public function setStringValue(?string $value): self
-    {
-        $this->StringValue = $value;
-
-        return $this;
     }
 
     public function validate(): void
